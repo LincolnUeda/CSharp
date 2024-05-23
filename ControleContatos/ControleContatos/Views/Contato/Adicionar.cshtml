@@ -1,0 +1,24 @@
+﻿@{ViewData["title"] = "Adicionar";}
+
+<div class="text-center gap-2">
+    <h1>Adicionar Novo Contato</h1>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+    <form >
+        <div class ="form-group gap-2">
+            <label for="nome">Nome</label>
+            <input type="text" name="nome" class="form-control" /> 
+
+            <label for="email">E-Mail</label>
+            <input type="text" name="email" class="form-control" />
+
+            <label for="celular">Celular</label>
+            <input type="text" name="celular" class="form-control" />
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary w-100">Salvar Contato</button>
+                <a role="button" class="btn btn-secondary w-100" asp-controller="Contato" asp-action="Index">Voltar</a>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
