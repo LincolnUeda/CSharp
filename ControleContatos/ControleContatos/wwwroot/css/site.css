@@ -20,3 +20,34 @@ html {
 body {
   margin-bottom: 60px;
 }
+.close-alert {
+    position: absolute;
+    right: -10px;
+    top: -15px;
+    border-radius: 15px;
+    width: 30px;
+    height: 30px;
+}
+
+.field-validation-error {
+    color: red;
+    background-color: #ffcece;
+    border-radius: 4%;
+    border: 1px solid #e67a7a;
+    position: relative;
+    top: -57px;
+    right: -152px;
+    animation:pop 0.5s;
+}
+
+@keyframes pop {
+    0% {
+        opacity: 0;
+        
+    }
+
+    100%{
+        opacity:1;
+       
+    }
+}
