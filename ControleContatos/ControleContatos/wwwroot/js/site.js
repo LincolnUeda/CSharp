@@ -1,7 +1,19 @@
 ﻿
 //paginação da tabela
 $(document).ready(function () {
-    $('#table-contatos').DataTable({
+    Getdatatable('#table-contatos');
+    Getdatatable('#table-usuarios');
+    
+});
+
+//função para fechar o aviso de sucesso ou falha no cadastro
+$('.close-alert').click(function () {
+    $('.alert').hide('hide');
+});
+
+
+function Getdatatable(id) {
+    $(id).DataTable({
         "ordering": true,
         "paging": true,
         "searching": true,
@@ -29,9 +41,4 @@ $(document).ready(function () {
             }
         }
     });
-});
-
-//função para fechar o aviso de sucesso ou falha no cadastro
-$('.close-alert').click(function () {
-    $('.alert').hide('hide');
-});
+}
