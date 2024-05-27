@@ -1,0 +1,56 @@
+﻿@model UsuarioModel
+@{
+    ViewData["title"] = "Adicionar";
+    var action = "Adicionar";
+    var caption = "Salvar Usuário";
+    var titulo = "Adicionar Novo Usuário";
+}
+
+ 
+@if (Model != null)
+{
+    if (Model.Id != 0)
+    {
+        ViewData["title"] = "Editar";
+        action = "Editar";
+        caption = "Alterar Usuário";
+        titulo = "Editar Usuário";
+    }
+}
+
+<div class="text-center gap-2">
+    <h1>@titulo</h1>
+    
+    
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+    <form asp-controller="Usuario" asp-action="@action" method="post" >
+        <div class ="form-group gap-2">
+            <div class="form-group">
+                <label for="Nome">Nome</label>
+                <input type="text" asp-for="Nome"  class="form-control" />
+                @Html.ValidationMessageFor(x=>x.Nome)
+            </div>
+            <div class="form-group">
+                <label for="Celular">Login</label>
+                <input type="text" asp-for="Login" class="form-control" />
+                @Html.ValidationMessageFor(x => x.Login)
+            </div>
+            <div class="form-group">
+                <label for="Email">E-Mail</label>
+                <input type="text" asp-for="Email" class="form-control" />
+                @Html.ValidationMessageFor(x => x.Email)
+            </div>
+                <div class="form-group">
+                    <label for="Senha">Senha</label>
+                    <input type="text" asp-for="Senha" class="form-control" />
+                    @Html.ValidationMessageFor(x => x.Senha)
+                </div>
+           
+            <div class="d-grid gap-2 mt-3">
+                <button type="submit" class="btn btn-primary w-100">@caption</button>
+                <a role="button" class="btn btn-secondary w-100" asp-controller="Usuario" asp-action="Index">Voltar</a>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
