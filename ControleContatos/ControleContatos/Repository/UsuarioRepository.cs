@@ -65,5 +65,11 @@ namespace ControleContatos.Repository
         {
             return _context.Usuarios.ToList();
         }
+
+        public UsuarioModel BuscarLogin (string login)
+        {
+            var usuario = _context.Usuarios.FirstOrDefault(u => u.Login == login);
+            return usuario;
+        }
     }
 }

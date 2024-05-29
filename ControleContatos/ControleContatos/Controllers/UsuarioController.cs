@@ -65,12 +65,22 @@ namespace ControleContatos.Controllers
         }
 
         [HttpPost]
-        public IActionResult Editar(UsuarioModel usuario)
+        public IActionResult Editar(UsuarioDTO usuarioDTO)
         {
             try
             {
+                UsuarioModel usuario = null;
+
                 if (ModelState.IsValid)
                 {
+                    usuario = new UsuarioModel()
+                    {
+                        Id = usuarioDTO.Id,
+                        Nome = usuarioDTO.Nome,
+                        Login = usuarioDTO.Login,
+                        Email = usuarioDTO.Email,
+                        Perfil = usuarioDTO.Perfil,
+                    };
                     _usuarioRepository.Editar(usuario);
                     TempData["MensagemSucesso"] = "Usuário alterado com sucesso";
                     return RedirectToAction("Index");

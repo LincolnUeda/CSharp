@@ -1,4 +1,5 @@
-﻿@model UsuarioModel
+﻿@using ControleContatos.Enums
+@model UsuarioModel
 @{
     ViewData["title"] = "Adicionar";
     var action = "Adicionar";
@@ -34,19 +35,29 @@
                 <label for="Celular">Login</label>
                 <input type="text" asp-for="Login" class="form-control" />
                 @Html.ValidationMessageFor(x => x.Login)
+                <label class="w-100">Perfil</label>
+                <select asp-for="Perfil" class="w-100 form-select">
+                    <option value="0">Selecionar</option>
+                    <option value="@PerfilEnum.Admin">Administrador</option>
+                    <option value="@PerfilEnum.Padrao">Padrão</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="Email">E-Mail</label>
                 <input type="text" asp-for="Email" class="form-control" />
                 @Html.ValidationMessageFor(x => x.Email)
+
             </div>
+            @if (Model == null){
                 <div class="form-group">
                     <label for="Senha">Senha</label>
                     <input type="text" asp-for="Senha" class="form-control" />
                     @Html.ValidationMessageFor(x => x.Senha)
                 </div>
-           
-            <div class="d-grid gap-2 mt-3">
+            }
+
+
+                <div class="d-grid gap-2 mt-3">
                 <button type="submit" class="btn btn-primary w-100">@caption</button>
                 <a role="button" class="btn btn-secondary w-100" asp-controller="Usuario" asp-action="Index">Voltar</a>
             </div>

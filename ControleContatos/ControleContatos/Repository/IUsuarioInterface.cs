@@ -11,5 +11,6 @@ namespace ControleContatos.Repository
 
         List<UsuarioModel> ListarTodos();
         UsuarioModel ListarPorId(int id);
+        UsuarioModel BuscarLogin(string login);
     }
 }
