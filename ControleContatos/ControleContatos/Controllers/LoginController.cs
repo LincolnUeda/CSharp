@@ -55,5 +55,11 @@ namespace ControleContatos.Controllers
                 return RedirectToAction("index");
             }
         }
+
+        public IActionResult Sair()
+        {
+            _sessao.RemoverSessaoUsuario();
+            return RedirectToAction("Index","Login");
+        }
     }
 }
