@@ -61,5 +61,41 @@ namespace ControleContatos.Controllers
             _sessao.RemoverSessaoUsuario();
             return RedirectToAction("Index","Login");
         }
+
+        public IActionResult RedefinirSenha()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult EnviarLink(RedefinirModel redefinir)
+        {
+            try {
+
+                if (ModelState.IsValid)
+                {
+                    UsuarioModel usuario = _usuarioRepository.BuscarLoginEmail(redefinir.Login,redefinir.Email);
+
+                    if (usuario != null)
+                    {
+                        string novaSenha = usuario.GeraNovaSenha();
+
+                        TempData["MensagemSucesso"] = "Uma nova senha foi enviada para seu email";
+                        return RedirectToAction("Index", "Login");
+
+                    }
+                    TempData["MensagemErro"] = $"Não foi possível redefinir sua senha. Verifique os dados informados";
+                }
+
+                
+                return View("RedefinirSenha");
+            
+            }catch (Exception ex)
+            {
+                TempData["MensagemErro"] = $"Ops! Não foi possível redefinir sua senha. Erro: {ex.Message}";
+                return RedirectToAction("index");
+    }
+            return View();
+        }
     }
 }

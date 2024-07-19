@@ -15,8 +15,16 @@
             <button type="button" class="btn btn-danger btn-sm close-alert">X</button>
             @TempData["MensagemErro"]
         </div>
+        
     }
 
+    @if(TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="btn btn-success btn-sm close-alert">X</button>
+            @TempData["MensagemSucesso"]
+        </div>
+    }
 </div>
 
 <div class="text-center d-grid gap-2 d-md-flex justify-content-md-center">
@@ -35,6 +43,9 @@
 
         </div>
         <button type="submit" class="btn btn-primary">LOGIN</button>
+        <br />
+        <br />
+        <a asp-controller="Login" asp-action="RedefinirSenha" class="text-primary ">Esqueci minha senha</a>
 
     </form>   
     

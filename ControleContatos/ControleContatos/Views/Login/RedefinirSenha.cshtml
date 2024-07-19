@@ -1,0 +1,42 @@
+﻿@model RedefinirModel
+@{
+    Layout = "_LayoutLogin";
+    ViewData["Title"] = "Redefinir Senha";
+
+}
+
+<div class="text-center mb-5">
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert">X</button>
+            @TempData["MensagemErro"]
+        </div>
+    }
+
+</div>
+
+
+<div class="text-center d-grid gap-2 d-md-flex justify-content-md-center">
+
+    <form asp-controller="Login" asp-action="EnviarLink" method="post">
+        <div class="mb-3">
+            <label for="login">Login</label>
+            <input type="text" class="form-control" id="login" asp-for="Login" />
+            @Html.ValidationMessageFor(x => x.Login)
+
+        </div>
+        <div class="mb-3">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" asp-for="Email" />
+            @Html.ValidationMessageFor(x => x.Email)
+
+        </div>
+        <div class="d-grid gap-2 mt-3">
+            <button type="submit" class="btn btn-primary w-100">Redefinir Senha</button>
+            <a role="button" class="btn btn-secondary w-100" asp-controller="Login" asp-action="Index">Voltar</a>
+        </div>
+    </form>
+
+
+</div>

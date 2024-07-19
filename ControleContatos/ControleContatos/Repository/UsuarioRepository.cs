@@ -72,5 +72,10 @@ namespace ControleContatos.Repository
             var usuario = _context.Usuarios.FirstOrDefault(u => u.Login == login);
             return usuario;
         }
+
+        public UsuarioModel BuscarLoginEmail(string login, string email)
+        {
+            return _context.Usuarios.FirstOrDefault(x=>x.Email == email && x.Login == login);
+        }
     }
 }
