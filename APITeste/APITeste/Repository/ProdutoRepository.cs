@@ -63,5 +63,10 @@ namespace APITeste.Repository
         {
             return _dbcontext.Produtos.ToList();
         }
+
+        public List<ProdutoModel> Teste()
+        {
+            return _dbcontext.Produtos.ToList();
+        }
     }
 }

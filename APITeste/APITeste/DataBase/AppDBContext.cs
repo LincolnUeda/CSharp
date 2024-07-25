@@ -12,5 +12,6 @@ namespace APITeste.DataBase
 
 
         public DbSet<ProdutoModel> Produtos { get; set; }
+        public DbSet<ClienteModel> Clientes { get; set; }
     }
 }
