@@ -7,8 +7,8 @@ namespace APITeste.Repository
     {
         void Adicionar(TEntity obj);
         void Editar(TEntity obj);
-        void Apagar(TEntity obj);
-        TEntity ListarId(object id);
+        void Apagar(TEntity id);
+        TEntity? ListarId(int id);
         List<TEntity> ListarTodos();
     }
 }

@@ -24,19 +24,49 @@ namespace APITeste.Controllers
             return clientes;
         }
 
-
-        [HttpPost("Adicionar")]
-        public ClienteModel Adicionar(ClienteModel novocliente)
+        [HttpGet("ListarId")]
+        public ClienteModel ListarId(int id)
         {
-           
-             _clienteRepository.Adicionar(novocliente);
-           
+            var cliente = _clienteRepository.ListarId(id);
+            if (cliente == null)
+            {
+                cliente = new ClienteModel { Id = 0, Nome = "cliente não encontrado", Cpf = "0"};
+            }
 
-            return novocliente;
+            return cliente;
         }
 
 
+        [HttpPost("Adicionar")]
+        public ClienteModel Adicionar(ClienteDTO novocliente)
+        {
+            ClienteModel clienteModel = new ClienteModel
+            {
+                Cpf = novocliente.Cpf,
+                Nome = novocliente.Nome,
+            };
+            _clienteRepository.Adicionar(clienteModel);
+           
 
+            return clienteModel;
+        }
+
+
+        [HttpPut("Editar")]
+        public ClienteModel Editar(ClienteModel cliente)
+        {
+           
+            _clienteRepository.Editar(cliente);
+            return cliente;
+        }
+
+        [HttpDelete("Apagar")]
+        public ClienteModel Apagar(ClienteModel cliente)
+        {
+
+            _clienteRepository.Apagar(cliente);
+            return cliente;
+        }
 
 
 

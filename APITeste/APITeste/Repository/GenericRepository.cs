@@ -22,17 +22,26 @@ namespace APITeste.Repository
 
         public void Apagar(TEntity obj)
         {
-            _dbcontext.Set<TEntity>().Remove(obj);
+            TEntity existe = _dbcontext.Set<TEntity>().Find(obj);
+            if ( existe != null)
+            {
+                _dbcontext.Set<TEntity>().Remove(existe);
+                _dbcontext.SaveChanges();
+            }
+            
         }
 
         public void Editar(TEntity obj)
         {
             _dbcontext.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _dbcontext.SaveChanges();
         }
 
-        public TEntity ListarId(object id)
+        public TEntity? ListarId(int id)
         {
-            throw new NotImplementedException();
+            var existe = _dbcontext.Set<TEntity>().Find(id);
+            
+            return existe;
         }
 
         public List<TEntity> ListarTodos()

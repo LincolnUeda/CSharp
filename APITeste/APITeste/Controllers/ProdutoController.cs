@@ -47,5 +47,17 @@ namespace APITeste.Controllers
 
             return _produtorepository.Apagar(IdProduto);
         }
+
+
+        [HttpGet("ListarId")]
+        public ProdutoModel ListarId(int id)
+        {
+            ProdutoModel produto = _produtorepository.ListarId(id);
+            if (produto == null)
+            {
+                produto = new ProdutoModel { Id = 0, descricao = "produto não encontrado", valor = 0};
+            }
+            return produto;
+        }
     }
 }

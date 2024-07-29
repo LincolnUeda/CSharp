@@ -1,8 +1,11 @@
+
 using APITeste.Controllers;
 using APITeste.DataBase;
 using APITeste.Model;
 using APITeste.Repository;
 using Microsoft.EntityFrameworkCore;
+using QuestPDF.Infrastructure;
+using QuestPDF;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +30,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+Settings.License = LicenseType.Community;
 
 app.UseHttpsRedirection();
 

@@ -64,9 +64,12 @@ namespace APITeste.Repository
             return _dbcontext.Produtos.ToList();
         }
 
-        public List<ProdutoModel> Teste()
+        public ProdutoModel ListarId(int id)
         {
-            return _dbcontext.Produtos.ToList();
+
+            return _dbcontext.Produtos.Find(id);
         }
+
+       
     }
 }

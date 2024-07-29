@@ -10,5 +10,6 @@ namespace APITeste.Repository
         ProdutoModel Editar(ProdutoModel produto);
         ProdutoModel Apagar (int IdProduto);
         List<ProdutoModel> ListarProdutos();
+        ProdutoModel ListarId(int id);
     }
 }
