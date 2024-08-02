@@ -1,6 +1,7 @@
 ﻿using APITeste.Model;
 using APITeste.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
@@ -22,8 +23,12 @@ namespace APITeste.Controllers
 
 
         [HttpGet("GerarPDF")]
-        public IActionResult GetPDF()
+        public IActionResult RelCadastral(string? titulo)
         {
+            if (titulo == null)
+            {
+                titulo = "Titulo";
+            }
             Document document = Document.Create(container =>
             {
                 container.Page(page =>
@@ -32,25 +37,39 @@ namespace APITeste.Controllers
                     page.Margin(2, Unit.Centimetre);
                     page.PageColor(Colors.White);
                     page.DefaultTextStyle(x => x.FontSize(20));
-                    page.Header()
-                        .Text("Lista de Clientes")
-                        .SemiBold().FontSize(36).FontColor(Colors.Blue.Medium);
+                    page.Header().Border(1).PaddingVertical(5).PaddingHorizontal(3).Text(titulo).SemiBold().FontSize(16).FontColor(Colors.Blue.Medium);
 
-                    page.Content()
-                        .PaddingVertical(1, Unit.Centimetre)
-                        .Column(x =>
+                  
+
+                    page.Content().Table(table => {
+
+                        table.ColumnsDefinition(columns =>
                         {
-                            x.Spacing(20);
-
-                            List<ClienteModel> clientes = _clienteRepository.ListarTodos();
-                            foreach (var cliente in clientes)
+                            int[] columnswidth = [80,300,100];
+                            
+                            foreach (int i in columnswidth)
                             {
-
-                                string texto = "Código:" + cliente.Id + "\nCPF: " + cliente.Cpf + "\nNome: " + cliente.Nome;
-                                x.Item().Text(texto).FontSize(12);
-                                
+                                columns.ConstantColumn(i);
                             }
+                            
                         });
+
+                        table.Cell().PaddingRight(20).PaddingVertical(10).AlignRight().Text("Código").FontSize(14).Bold();
+                        table.Cell().PaddingRight(20).PaddingVertical(10).Text("Nome").FontSize(14).Bold();
+                        table.Cell().PaddingRight(20).PaddingVertical(10).Text("CPF").FontSize(14).Bold();
+
+                       
+                        List<ClienteModel> clientes = _clienteRepository.ListarTodos();
+                        foreach (var cliente in clientes)
+                        {
+
+                            table.Cell().PaddingRight(20).AlignRight().Text(cliente.Id.ToString()).FontSize(12);
+                            table.Cell().PaddingRight(5).Text(cliente.Nome).FontSize(12);
+                            table.Cell().PaddingRight(5).Text(cliente.Cpf).FontSize(12);
+
+                        }
+
+                    });
 
                     page.Footer()
                         .AlignCenter()
@@ -62,7 +81,7 @@ namespace APITeste.Controllers
                 });
             });
             byte[] pdfBytes = document.GeneratePdf();
-            
+           
             return File(pdfBytes, "application/pdf","teste.pdf");
 
         }
